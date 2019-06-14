@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="pages/register/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/register/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/register/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/register/css/main.css">
+    <link rel="stylesheet" type="text/css" href="pages/register/css/util.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('pages/register/images/bg-02.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+						Register
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter first name">
+                    <input class="input100" id="firstName" type="text" name="firstName" placeholder="First name">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter last name">
+                    <input class="input100" id="lastName" type="text" name="lastName" placeholder="Last name">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    <input class="input100" id="userName" type="text" name="username" placeholder="Username">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input class="input100" id="password" type="password" name="pass" placeholder="Password">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter email">
+                    <input class="input100" id="email" type="email" name="email" placeholder="Email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter a security question">
+                    <input class="input100" id="question" type="txt" name="question" placeholder="Enter a security question">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter the answer for the above question">
+                    <input class="input100" id="answer" type="txt" name="answer" placeholder="Enter the answer for the above question">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Select your city of residence">
+                    <input class="input100" id="city" type="text" name="city" placeholder="Select your city of residence">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="dropdown">
+                    <a class="txt2">Select your country of residence</a>
+                    <br/>
+                    <select class="txt2" id = country>
+                        <option value="Australia">Australia</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="China">China</option>
+                        <option value="Denemark">Denemark</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="August">August</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="USA">USA</option>
+                    </select>
+                </div>
+                <br/>
+
+                <div class="dropdown">
+                    <a class="txt2">Select Your favorite category</a>
+                    <br/>
+                    <select class="txt2" id = category1>
+                        <option value="Museum">Museum</option>
+                        <option value="Food & Drink">Food & Drink</option>
+                        <option value="Sights & Landmarks">Sights & Landmarks</option>
+                        <option value="Nature & Parks">Nature & Parks</option>
+                    </select>
+                </div>
+                <br/>
+
+                <div class="dropdown">
+                    <a class="txt2">Select another favorite category </a>
+                    <br/>
+                    <select class="txt2" id = category2>
+                        <option value="Museum">Museum</option>
+                        <option value="Food & Drink">Food & Drink</option>
+                        <option value="Sights & Landmarks">Sights & Landmarks</option>
+                        <option value="Nature & Parks">Nature & Parks</option>
+                    </select>
+                </div>
+                <br/>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" ng-click="myFunc()">
+                        Submit registration form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

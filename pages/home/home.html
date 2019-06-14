@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="pages/home/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/home/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/home/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="pages/home/css/main.css">
+    <link rel="stylesheet" type="text/css" href="pages/home/css/util.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+</br>
+</br>
+<div id="background">
+    <!-- display all cities -->
+    <p ng-repeat="item in points">
+        <a ng-click="toShow(item.NAME)">
+            Point Name: <span ng-bind="item.NAME"></span><br>
+        </a>
+        <!--<img ng-src="{{ point.image }}">-->
+    </p>
+</div>
+
+
+<div id="poiShow" ng-show="poiShow">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <span class="login100-form-logo">
+                <!--<img ng-model="imgSource" src= {{imgSource}}>-->
+            </span>
+            <span ng-model="name" class="login100-form-title p-b-34 p-t-27">
+                {{name}}
+            </span>
+            <a class="txt2">Description</a>
+            <br/>
+            <a class="txt1" ng-model="description">{{description}}</a>
+            <br/>
+            <a class="txt2">Number of views</a>
+            <br/>
+            <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
+            <br/>
+            <a class="txt2">Rank</a>
+            <br/>
+            <a class="txt1" ng-model="rank">{{rank}}</a>
+            <br/>
+            <a class="txt2">Review</a>
+            <br/>
+            <a class="txt1" ng-model="review">{{review}}</a>
+            <br/>
+
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" ng-click="stopShow()">
+                    Exit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

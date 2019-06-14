@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'FontAwesome';
+            color: white;
+        }
+
+        h2{
+            color: #333333;
+            font-family: 'FontAwesome';
+            position: absolute;
+            text-align: center;
+            left: 40%;
+            top:8%;
+        }
+        h1{
+            color: #333333;
+            font-family: 'FontAwesome';
+            position: absolute;
+            font-size: medium;
+            float: left;
+            left:32%;
+        }
+        .split {
+            height: 50%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            /*padding-top: 20px;*/
+        }
+
+        .left {
+            left: 0;
+            top: 50%;
+            /*background-color: #111;*/
+        }
+
+        .right {
+            top:5%;
+            right: 0;
+            /*background-color: red;*/
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .centeredR {
+            position: absolute;
+            top: 50%;
+            right: 30%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .centered img {
+            width: 250px;
+            border-radius: 30%;
+        }
+
+        .centeredR img {
+            width: 250px;
+            border-radius: 30%;
+        }
+
+        li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<div class="split left">
+    <h2>your Favorites points of View</h2>
+    <div class="centered">
+        <img ng-src="{{firstPointImage}}" ng-style="avatar_style">
+        <h1 ng-model="firstPointName">{{firstPointName}}</h1>
+    </div>
+    <div class="centeredR">
+        <img ng-src="{{secondPointImage}}" ng-style="avatar_style">
+        <h1 ng-model="secondPointName">{{secondPointName}}</h1>
+    </div>
+</div>
+<div class="split right">
+    <h2>your last saved points</h2>
+    <div class="centered">
+        <img ng-src="{{firstSavedPointImage}}" ng-style="avatar_style">
+        <h1 ng-model="firstSavePointName">{{firstSavePointName}}</h1>
+    </div>
+    <div class="centeredR">
+        <img ng-src="{{secondSavedPointImage}}" ng-style="avatar_style">
+        <h1 ng-model="secondSavedPointName">{{secondSavedPointName}}</h1>
+    </div>
+</div>
+
+
+<!--<div class="split top">-->
+<!--<div class="centered">-->
+<!--<h2>your Favorites points of View</h2>-->
+<!--<li class="leftPoint" ng-model="firstPointName">{{firstPointName}}-->
+<!--</br>-->
+<!--</br>-->
+<!--<img ng-src="{{firstPointImage}}" ng-style="avatar_style"></li>-->
+<!--<li class="rightPoint" ng-model="secondPointName">{{secondPointName}}-->
+<!--</br>-->
+<!--</br>-->
+<!--<img ng-src="{{secondPointImage}}" ng-style="avatar_style"></li>-->
+<!--</li>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="split bottom">-->
+<!--<div class="centered">-->
+<!--<h2>your last saved points</h2>-->
+<!--<li class="leftPoint" ng-model="firstSavePointName">{{firstSavePointName}}-->
+<!--</br>-->
+<!--</br>-->
+<!--<img ng-src="{{firstSavedPointImage}}" ng-style="avatar_style"></li>-->
+<!--<li class="rightPoint" ng-model="secondSavedPointName">{{secondSavedPointName}}-->
+<!--</br>-->
+<!--</br>-->
+<!--<img ng-src="{{secondSavedPointImage}}" ng-style="avatar_style"></li>-->
+<!--</li>-->
+<!--</div>-->
+<!--</div>-->
+</body>
+</html>
+

@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @font-face {
+            font-family: Poppins-SemiBold;
+            src: url('pages/fonts/poppins/Poppins-SemiBold.ttf');
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar a {
+            font-family: Poppins-SemiBold;
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .tab:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        .main {
+            padding: 16px;
+            margin-top: 30px;
+            height: 1500px; /* Used in this example to enable scrolling */
+        }
+    </style>
+</head>
+
+<body ng-controller="indexController" ng-app="myApp">
+
+<!-- load angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
+<script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+
+<!-- load app -->
+<script src="app.js"></script>
+<script src="indexController.js"></script>
+
+<!-- load controllers -->
+<script src="pages/about/aboutController.js"></script>
+<script src="pages/poi/poiController.js"></script>
+<script src="pages/http/httpController.js"></script>
+<script src="pages/register/registerController.js"></script>
+<script src="pages/logIn/logInController.js"></script>
+<script src="pages/restorePassword/restorePasswordController.js"></script>
+<script src="pages/home/homeController.js"></script>
+<script src="pages/searchPOI/searchPOIController.js"></script>
+<script src="pages/loggedIn/loggedInController.js"></script>
+
+<!-- the website -->
+<h1>My Website</h1>
+
+<div class="navbar">
+    <a ng-model="user">Hello {{user}}</a>
+    <a class="tab" href="#!">Home</a>
+    <a class="tab" href="#!about">About</a>
+    <a class="tab" href="#!logIn" ng-show="!loggedIn">Log In</a>
+    <a class="tab" href="#!register" ng-show="!loggedIn">Register</a>
+    <a class="tab" href="#!poi">POI</a>
+    <a class="tab" href="#!httpRequest">POI</a>
+    <a class="tab" href="#!searchPOI">Search Point Of Interest</a>
+    <a class="tab" href="#!loggedIn">Logged In</a>
+</div>
+
+<!-- This section changes as the hashbang changes -->
+<div ng-view></div>
+</body>
+</html>
