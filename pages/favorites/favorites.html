@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Simple Photo Gallery - RNA Team</title>
+
+    <style>
+        .photoDiv
+        {
+            border: 10px double red;
+        }
+    </style>
+
+    <script src="http://code.angularjs.org/1.2.0rc1/angular.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="photoGallery.js"></script>
+
+</head>
+<body ng-app="photoGalleryModule" ng-controller="photoGalleryCtrl">
+<div style="width: 60%; margin: 0 auto;">
+    <center><font color="blue">Simple Photo Gallery by RNA Team</font></center>
+    <div id="divPhoto" class="photoDiv"></div>
+
+</div>
+</body>
+</html>
