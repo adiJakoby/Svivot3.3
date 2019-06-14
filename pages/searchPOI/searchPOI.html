@@ -7,77 +7,71 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        /* Container for flexboxes */
+        section {
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        /* Style the navigation menu */
+        nav {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            background: #ccc;
+            padding: 10px;
+        }
+
+        /* Style the list inside the menu */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Style the content */
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container-fluid">
-    <h1>Hello World!</h1>
-    <p>Resize the browser window to see the effect.</p>
     <div class="row">
-        <div class="col-sm-3" style="background-color:lavender;">.col-sm-3</div>
-        <div class="col-sm-6" style="background-color:lavenderblush;">.col-sm-6</div>
-        <div class="col-sm-3" style="background-color:lavender;">.col-sm-3</div>
+        <div class="col-sm-2">
+            <button>Sort results by rank</button>
+        </div>
+        <div class="col-sm-3">
+            <input type="text" name="search" placeholder="Search..">
+        </div>
+        <div class="col-sm-3">
+            <button>Find the perfect point</button>
+        </div>
     </div>
 </div>
 
+<section>
+    <nav>
+        <ul>
+            <h2>Filter by Category:</h2>
+            <li><a href="#">Museum</a></li>
+            <li><a href="#">Food & Drink</a></li>
+            <li><a href="#">Sights & Landmarks</a></li>
+            <li><a href="#">Nature & Parks</a></li>
+        </ul>
+    </nav>
+
+    <article>
+        <h1>London</h1>
+        <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+        <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+    </article>
+</section>
+
 </body>
 </html>
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <style>-->
-<!--        input[type=text] {-->
-<!--            width: 130px;-->
-<!--            box-sizing: border-box;-->
-<!--            border: 2px solid #ccc;-->
-<!--            border-radius: 4px;-->
-<!--            font-size: 16px;-->
-<!--            background-color: white;-->
-<!--            /*background-image: url('searchicon.png');*/-->
-<!--            background-position: 10px 10px;-->
-<!--            background-repeat: no-repeat;-->
-<!--            padding: 12px 20px 12px 40px;-->
-<!--            -webkit-transition: width 0.4s ease-in-out;-->
-<!--            transition: width 0.4s ease-in-out;-->
-<!--        }-->
-
-<!--        input[type=text]:focus {-->
-<!--            width: 100%;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<p>Points of view</p>-->
-
-<!--<form>-->
-<!--    <input type="text" name="search" placeholder="Search..">-->
-<!--    <br/>-->
-<!--    <br/>-->
-<!--    You can filter by specific category:-->
-<!--    <select class="txt2" id = category>-->
-<!--        <option value="Museum">Museum</option>-->
-<!--        <option value="Food & Drink">Food & Drink</option>-->
-<!--        <option value="Sights & Landmarks">Sights & Landmarks</option>-->
-<!--        <option value="Nature & Parks">Nature & Parks</option>-->
-<!--    </select>-->
-<!--    <button>Filter</button>-->
-<!--    <br/>-->
-<!--    <br/>-->
-<!--    <button>Sort results by rank</button>-->
-<!--    <br/>-->
-<!--    <br/>-->
-
-<!--</form>-->
-
-
-
-
-
-<!--</body>-->
-<!--</html>-->
