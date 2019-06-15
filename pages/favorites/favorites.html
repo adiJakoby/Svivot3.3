@@ -1,25 +1,121 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-    <title>Simple Photo Gallery - RNA Team</title>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
-        .photoDiv
-        {
-            border: 10px double red;
+        /* Container for flexboxes */
+        section {
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        /* Style the navigation menu */
+        nav {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            background: #ccc;
+            padding: 10px;
+        }
+
+        /* Style the list inside the menu */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Style the content */
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+            background-color: #f1f1f1;
+            padding: 10px;
         }
     </style>
-
-    <script src="http://code.angularjs.org/1.2.0rc1/angular.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="photoGallery.js"></script>
-
 </head>
-<body ng-app="photoGalleryModule" ng-controller="photoGalleryCtrl">
-<div style="width: 60%; margin: 0 auto;">
-    <center><font color="blue">Simple Photo Gallery by RNA Team</font></center>
-    <div id="divPhoto" class="photoDiv"></div>
+<body>
 
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <button>Sort results by rank</button>
+        </div>
+        <div class="col-sm-3">
+            <input type="text" name="search" placeholder="Search..">
+        </div>
+        <div class="col-sm-3">
+            <button>Find the perfect point</button>
+        </div>
+    </div>
+</div>
+
+<section>
+    <nav>
+        <ul>
+            <h2>Filter by Category:</h2>
+            <li><a ng-click="filterByCategory('Museum')">Museum</a></li>
+            <li><a ng-click="filterByCategory('Food & Drink')">Food & Drink</a></li>
+            <li><a ng-click="filterByCategory('Sights & Landmarks')">Sights & Landmarks</a></li>
+            <li><a ng-click="filterByCategory('Nature & Parks')">Nature & Parks</a></li>
+        </ul>
+    </nav>
+
+    <article>
+
+        <div ng-repeat="set in points" class="row text-center">
+            <div ng-repeat="item in set" class="col-sm-4">
+                <div class="thumbnail">
+                    <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
+                    <br/>
+                    <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                            ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span ng-model="name" class="login100-form-title p-b-34 p-t-27">
+                    {{name}}</span></h4>
+            </div>
+            <div class="modal-body">
+                <a class="txt2">Description</a>
+                <br/>
+                <a class="txt1" ng-model="description">{{description}}</a>
+                <br/>
+                <a class="txt2">Number of views</a>
+                <br/>
+                <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
+                <br/>
+                <a class="txt2">Rank</a>
+                <br/>
+                <a class="txt1" ng-model="rank">{{rank}}</a>
+                <br/>
+                <a class="txt2">Review</a>
+                <br/>
+                <a class="txt1" ng-model="review">{{review}}</a>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

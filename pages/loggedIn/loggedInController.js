@@ -1,9 +1,11 @@
-angular.module('myApp').controller('loggedInController', function ($scope, $http ,$window) {
+angular.module('myApp').controller('loggedInController', function ($scope, $http, $window) {
     let self = $scope;
-    $scope.firstPointName = "hey";
+    $scope.poiShow = false;
+    let savedPoints = [];
+    let favoritesPoints = [];
+    self.savedPoints = [];
+    self.favoritesPoints = [];
 
-    let point0 = [];
-    let point1 = [];
     let token = $window.sessionStorage.getItem("token");
 
     $http({
@@ -13,12 +15,20 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
             'x-auth-token': token,
         }
     }).then(function (res) {
-        let name0 = res.data[0].NAME;
-        let name1 = res.data[1].NAME;
-        $scope.firstPointName = name0;
-        $scope.secondPointName = name1;
-        $scope.firstPointImage = 'images/'+name0+'.jpg';
-        $scope.secondPointImage = 'images/'+name1+'.jpg';
+        for (let i = 0; i < res.data.length; i++) {
+            favoritesPoints[i] = res.data[i];
+            $http({
+                method: "GET",
+                url: "http://localhost:3000/getPoint",
+                params: {
+                    pointName: favoritesPoints[i].NAME
+                }
+            }).then(function (res) {
+                self.favoritesPoints[i] = res.data[0];
+            }, function (err) {
+                console.log(err)
+            })
+        }
     }, function (err) {
         console.log(err)
     });
@@ -30,14 +40,42 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
             'x-auth-token': token,
         }
     }).then(function (res) {
-        console.log(res.data);
-        let savedImage1 = res.data[0].name;
-        let savedImage2 = res.data[1].name;
-        $scope.firstSavePointName = savedImage1;
-        $scope.secondSavedPointName = savedImage2;
-        $scope.firstSavedPointImage = 'images/'+savedImage1+'.jpg';
-        $scope.secondSavedPointImage = 'images/'+savedImage2+'.jpg';
+        for (let j = 0; j < res.data.length; j++) {
+            savedPoints[j] = res.data[j];
+            $http({
+                method: "GET",
+                url: "http://localhost:3000/getPoint",
+                params: {
+                    pointName: savedPoints[j].name
+                }
+            }).then(function (res) {
+                self.savedPoints[j] = res.data[0];
+            }, function (err) {
+                console.log(err)
+            })
+        }
     }, function (err) {
         console.log(err)
     })
+
+    $scope.toShow = function (name) {
+        $http({
+            method: "GET",
+            url: "http://localhost:3000/getPoint",
+            params: {
+                pointName: name
+            }
+        }).then(function (res) {
+            $scope.name = name;
+            $scope.imgSource = res.data[0].PICTURE;
+            $scope.description = res.data[0].description;
+            $scope.numOfViews = res.data[0].numofviews;
+            $scope.rank = res.data[0].rank;
+            $scope.review = res.data[0].REVIEW;
+
+            $scope.poiShow = true;
+        }, function (err) {
+            console.log(err)
+        })
+    }
 });

@@ -1,130 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
-        body {
-            font-family: 'FontAwesome';
+
+
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+            padding: 10px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
             color: white;
+            padding: 15px;
         }
 
-        h2 {
-            color: #333333;
-            font-family: 'FontAwesome';
-            position: absolute;
-            text-align: center;
-            left: 40%;
-            top: 8%;
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height: auto;
+            }
         }
-
-        h1 {
-            color: #333333;
-            font-family: 'FontAwesome';
-            position: absolute;
-            font-size: medium;
-            float: left;
-            left: 32%;
-        }
-
-        .split {
-            height: 50%;
+        hr {
+            border-right : 0;
+            border-left: 0;
             width: 100%;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            overflow-x: hidden;
-            /*padding-top: 20px;*/
         }
-
-        .left {
-            left: 0;
-            top: 50%;
-            /*background-color: #C0C0C0;*/
-        }
-
-        .right {
-            top: 5%;
-            right: 0;
-            /*background-color: red;*/
-        }
-
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 30%;
-            transform: translate(-50%, -50%);
+        h4{
             text-align: center;
         }
 
-        .centeredR {
-            position: absolute;
-            top: 50%;
-            right: 30%;
-            transform: translate(-50%, -50%);
+        .thumbnail p{
             text-align: center;
         }
 
-        .centered img {
-            width: 250px;
-            border-radius: 30%;
-        }
 
-        .centeredR img {
-            width: 250px;
-            border-radius: 30%;
-        }
-
-        li {
-            list-style-type: none;
-        }
-
-        /*.container-login100 {*/
-            /*width: 100%;*/
-            /*min-height: 100vh;*/
-            /*display: -webkit-box;*/
-            /*display: -webkit-flex;*/
-            /*display: -moz-box;*/
-            /*display: -ms-flexbox;*/
-            /*display: flex;*/
-            /*flex-wrap: wrap;*/
-            /*justify-content: center;*/
-            /*align-items: center;*/
-            /*padding: 15px;*/
-
-            /*background-repeat: no-repeat;*/
-            /*background-position: center;*/
-            /*background-size: cover;*/
-            /*position: relative;*/
-            /*z-index: 1;*/
-            /*overflow: hidden;*/
-        /*}*/
     </style>
 </head>
 <body>
-<!--<div class="container-login100" style="background-image: url('pages/logIn/images/bg-02.jpg');">-->
-    <div class="split left">
-        <h2>your Favorites points of View</h2>
-        <div class="centered">
-            <img ng-src="{{firstPointImage}}" ng-style="avatar_style">
-            <h1 ng-model="firstPointName">{{firstPointName}}</h1>
-        </div>
-        <div class="centeredR">
-            <img ng-src="{{secondPointImage}}" ng-style="avatar_style">
-            <h1 ng-model="secondPointName">{{secondPointName}}</h1>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12">
+            <h4><small>your Favorites Points Of View</small></h4>
+            <hr>
+            <br>
+            <article>
+                    <div ng-repeat="item in favoritesPoints" class="col-sm-6">
+                        <div class="thumbnail">
+                            <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
+                            <br/>
+                            <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                                    ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                        </div>
+                    </div>
+            </article>
+            <hr>
+            <h4><small>your Saved Points Of View</small></h4>
+            <hr>
+            <article>
+                <div ng-repeat="point in savedPoints track by $index" class="col-sm-6">
+                    <div class="thumbnail">
+                        <img ng-src="{{ point.PICTURE }}" alt="Paris" width="400" height="300">
+                        <br/>
+                        <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                                ng-bind="point.NAME" ng-click="toShow(point.NAME)"></span></a></strong></p>
+                    </div>
+                </div>
+            </article>
         </div>
     </div>
-    <div class="split right">
-        <h2>your last saved points</h2>
-        <div class="centered">
-            <img ng-src="{{firstSavedPointImage}}" ng-style="avatar_style">
-            <h1 ng-model="firstSavePointName">{{firstSavePointName}}</h1>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span ng-model="name" class="login100-form-title p-b-34 p-t-27">
+                    {{name}}</span></h4>
+            </div>
+            <div class="modal-body">
+                <a class="txt2">Description</a>
+                <br/>
+                <a class="txt1" ng-model="description">{{description}}</a>
+                <br/>
+                <a class="txt2">Number of views</a>
+                <br/>
+                <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
+                <br/>
+                <a class="txt2">Rank</a>
+                <br/>
+                <a class="txt1" ng-model="rank">{{rank}}</a>
+                <br/>
+                <a class="txt2">Review</a>
+                <br/>
+                <a class="txt1" ng-model="review">{{review}}</a>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="centeredR">
-            <img ng-src="{{secondSavedPointImage}}" ng-style="avatar_style">
-            <h1 ng-model="secondSavedPointName">{{secondSavedPointName}}</h1>
-        </div>
+
     </div>
-<!--</div>-->
+</div>
 </body>
 </html>
-
