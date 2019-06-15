@@ -20,10 +20,24 @@ angular.module("myApp")
                 }
                 else{
                     sessionStorage.setItem("token", response.data);
+                    let token = response.data;
+
+                    $http({
+                        method: "GET",
+                        url: "http://localhost:3000/private/getSavedPoints",
+                        headers: {
+                            'x-auth-token': token,
+                        }
+                    }).then(function (res) {
+                        sessionStorage.setItem("favorites", res.data);
+                    }, function (err) {
+                        console.log(err)
+                    });
+
                     $scope.$emit('loggedIn', {userName: userName, loggedIn: true});
                     $window.location.href = "#!loggedIn"
                 }
-                $scope.myWelcome = response.data;
+                // $scope.myWelcome = response.data;
             });
         }
     });
