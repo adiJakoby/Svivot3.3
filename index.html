@@ -34,6 +34,10 @@
             color: black;
         }
 
+        .topnav-right {
+            float: right;
+        }
+
         .main {
             padding: 16px;
             margin-top: 30px;
@@ -78,6 +82,9 @@
     <a class="tab" href="#!searchPOI">Search Point Of Interest</a>
     <a class="tab" href="#!loggedIn">Logged In</a>
     <a class="tab" href="#!favorites">my Favorites</a>
+    <div class="topnav-right">
+        <a class="tab" ng-click="save()"><span class="glyphicon glyphicon-floppy-save"></span> Save Changes</a>
+    </div>
 </div>
 
 <!-- This section changes as the hashbang changes -->

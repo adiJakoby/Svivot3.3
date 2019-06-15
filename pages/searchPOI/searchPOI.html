@@ -123,6 +123,12 @@
                        data-target="#reviewModal">
                         <span class="glyphicon glyphicon-pencil"></span> Review
                     </a>
+                    <a ng-click="unSave(item.NAME)" ng-show="item.saved && loggedIn">
+                        <span class="glyphicon glyphicon-star"></span> Saved
+                    </a>
+                    <a ng-click="save(item.NAME)" ng-show="!item.saved && loggedIn">
+                        <span class="glyphicon glyphicon-star-empty"></span> Not Saved
+                    </a>
                 </div>
             </div>
         </div>

@@ -22,13 +22,16 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
             let threePoints = [];
             for (i = 0; i < 3; i++) {
                 if (j < res.data.length) {
+                    let isSaved = false;
                     if($scope.loggedIn) {
                         let m = 0;
-                        let isSaved = false;
                         for(; m < fav.length; m++){
-                            // console.log(JSON.parse(fav));
+                            if(fav[m].NAME == res.data[j].NAME){
+                                isSaved = true;
+                            }
                         }
                     }
+                    res.data[j].saved = isSaved;
                     threePoints[i] = res.data[j];
                     j++;
                 }
@@ -63,6 +66,16 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
                 let threePoints = [];
                 for (i = 0; i < 3; i++) {
                     if (j < res.data.length) {
+                        let isSaved = false;
+                        if($scope.loggedIn) {
+                            let m = 0;
+                            for(; m < fav.length; m++){
+                                if(fav[m].NAME == res.data[j].NAME){
+                                    isSaved = true;
+                                }
+                            }
+                        }
+                        res.data[j].saved = isSaved;
                         threePoints[i] = res.data[j];
                         j++;
                     }
@@ -78,11 +91,31 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
         })
     }
 
-    $scope.save = function () {
-        if ($window.loggedIn) {
-            let favorites = $window.sessionStorage.getItem("favorites");
+    $scope.unSave = function (name) {
+        let temp = [];
+        for(let i = 0; i < fav.length; i++){
+            if(fav[i].NAME == name){
 
+            }else{
+                temp.push(fav[i]);
+            }
         }
+        fav = temp;
+        $scope.reset();
+    }
+    $scope.save = function (name) {
+        $http({
+            method: "GET",
+            url: "http://localhost:3000/getPoint",
+            params: {
+                pointName: name
+            }
+        }).then(function (res) {
+            fav.push(res.data[0]);
+            $scope.reset();
+        }, function (err) {
+            console.log(err)
+        })
     }
 
     $scope.review = function () {
