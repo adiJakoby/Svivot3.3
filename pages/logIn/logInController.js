@@ -29,7 +29,7 @@ angular.module("myApp")
                             'x-auth-token': token,
                         }
                     }).then(function (res) {
-                        sessionStorage.setItem("favorites", res.data);
+                        sessionStorage.setItem("favorites", JSON.stringify(res.data));
                     }, function (err) {
                         console.log(err)
                     });

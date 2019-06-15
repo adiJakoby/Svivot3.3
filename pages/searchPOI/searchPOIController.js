@@ -4,7 +4,11 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
     let self = $scope;
     self.points = [];
     self.allPoints = [];
+    let fav;
     self.currPoint = "";
+    if($scope.loggedIn) {
+        fav =  JSON.parse(sessionStorage.getItem("favorites"));
+    }
 
     $http({
         method: "GET",
@@ -18,6 +22,13 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
             let threePoints = [];
             for (i = 0; i < 3; i++) {
                 if (j < res.data.length) {
+                    if($scope.loggedIn) {
+                        let m = 0;
+                        let isSaved = false;
+                        for(; m < fav.length; m++){
+                            // console.log(JSON.parse(fav));
+                        }
+                    }
                     threePoints[i] = res.data[j];
                     j++;
                 }
@@ -76,8 +87,42 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
 
     $scope.review = function () {
         let token = $window.sessionStorage.getItem("token");
-        console.log(self.currPoint);
-        let comment = document.getElementById('comment');
+        let comment = document.getElementById('comment').value;
+        let point = self.currPoint;
+        let rank = 0
+        if(document.getElementById("1").checked){
+            rank = 1;
+        }
+        else if(document.getElementById("2").checked){
+            rank = 2;
+        }
+        else if(document.getElementById("3").checked){
+            rank = 3;
+        }
+        else if(document.getElementById("4").checked){
+            rank = 4;
+        }
+        else if(document.getElementById("5").checked){
+            rank = 5;
+        }
+
+        console.log(rank);
+        $http({
+            method: "PUT",
+            url: "http://localhost:3000/private/addRank",
+            headers: {
+                'x-auth-token': token,
+            },
+            params: {
+                pointName: point,
+                rank: rank
+            }
+        }).then(function (res) {
+            console.log(res.data);
+        }, function (err) {
+            console.log(err)
+        });
+
         $http({
             method: "PUT",
             url: "http://localhost:3000/private/addReview",
@@ -85,11 +130,11 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
                 'x-auth-token': token,
             },
             params: {
-                pointName: '13',
+                pointName: point,
                 review: comment
             }
         }).then(function (res) {
-            console.log(res.data);
+            $window.alert("Your review has added,\nThank you")
         }, function (err) {
             console.log(err)
         });
