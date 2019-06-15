@@ -5,10 +5,25 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $htt
     self.points = [];
 
     $http({
-        method : "GET",
-        url : "http://localhost:3000/getAllPoints",
-    }).then( function (res) {
-        self.points = res.data;
+        method: "GET",
+        url: "http://localhost:3000/getAllPoints",
+    }).then(function (res) {
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        for (j; j < res.data.length;) {
+            let threePoints = [];
+            for (i = 0; i < 3; i++) {
+                if(j < res.data.length){
+                    threePoints[i] = res.data[j];
+                    j++;
+                }
+            }
+            self.points[k] = threePoints;
+            k++;
+        }
+
+        // self.points = res.data;
 
     }, function (err) {
         console.log(err)
@@ -17,12 +32,12 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $htt
     $scope.toShow = function (name) {
 
         $http({
-            method : "GET",
-            url : "http://localhost:3000/getPoint",
-            params : {
+            method: "GET",
+            url: "http://localhost:3000/getPoint",
+            params: {
                 pointName: name
             }
-        }).then( function (res) {
+        }).then(function (res) {
             console.log(res.data);
             $scope.name = name;
             $scope.imgSource = 'images/3.JPG';
@@ -30,7 +45,6 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $htt
             $scope.numOfViews = res.data[0].numofviews;
             $scope.rank = res.data[0].rank;
             $scope.review = res.data[0].REVIEW;
-            console.log($scope.description)
 
             $scope.poiShow = true;
         }, function (err) {
@@ -39,9 +53,38 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $htt
 
     }
 
-    $scope.stopShow = function () {
-        $scope.poiShow = false;
+    $scope.filterByCategory = function (category) {
+        self.points = [];
+
+        $http({
+            method: "GET",
+            url: "http://localhost:3000/getPointsByCategory",
+            params: {
+                category: name
+            }
+        }).then(function (res) {
+            let i = 0;
+            let j = 0;
+            let k = 0;
+            for (j; j < res.data.length;) {
+                let threePoints = [];
+                for (i = 0; i < 3; i++) {
+                    if(j < res.data.length){
+                        threePoints[i] = res.data[j];
+                        j++;
+                    }
+                }
+                self.points[k] = threePoints;
+                k++;
+            }
+
+            // self.points = res.data;
+
+        }, function (err) {
+            console.log(err)
+        })
     }
+
 
 });
 

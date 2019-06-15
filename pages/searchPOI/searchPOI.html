@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
     <style>
         /* Container for flexboxes */
         section {
@@ -41,6 +42,7 @@
 </head>
 <body>
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
@@ -59,19 +61,62 @@
     <nav>
         <ul>
             <h2>Filter by Category:</h2>
-            <li><a href="#">Museum</a></li>
-            <li><a href="#">Food & Drink</a></li>
-            <li><a href="#">Sights & Landmarks</a></li>
-            <li><a href="#">Nature & Parks</a></li>
+            <li><a ng-click="filterByCategory('Museum')">Museum</a></li>
+            <li><a ng-click="filterByCategory('Food & Drink')">Food & Drink</a></li>
+            <li><a ng-click="filterByCategory('Sights & Landmarks')">Sights & Landmarks</a></li>
+            <li><a ng-click="filterByCategory('Nature & Parks')">Nature & Parks</a></li>
         </ul>
     </nav>
 
     <article>
-        <h1>London</h1>
-        <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-        <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+
+        <div ng-repeat="set in points" class="row text-center">
+            <div ng-repeat="item in set" class="col-sm-4">
+                <div class="thumbnail">
+                    <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
+                    <br/>
+                    <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                            ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                </div>
+            </div>
+        </div>
     </article>
 </section>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span ng-model="name" class="login100-form-title p-b-34 p-t-27">
+                    {{name}}</span></h4>
+            </div>
+            <div class="modal-body">
+                <a class="txt2">Description</a>
+                <br/>
+                <a class="txt1" ng-model="description">{{description}}</a>
+                <br/>
+                <a class="txt2">Number of views</a>
+                <br/>
+                <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
+                <br/>
+                <a class="txt2">Rank</a>
+                <br/>
+                <a class="txt1" ng-model="rank">{{rank}}</a>
+                <br/>
+                <a class="txt2">Review</a>
+                <br/>
+                <a class="txt1" ng-model="review">{{review}}</a>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
