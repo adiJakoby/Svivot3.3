@@ -4,7 +4,7 @@ angular.module("myApp")
         $scope.myFunc = function () {
             let userName = (document.getElementById("userName").value);
             let password = (document.getElementById("password").value);
-            console.log(userName +" " + password);
+            console.log(userName + " " + password);
             self = this;
 
             let formdata = {
@@ -13,12 +13,11 @@ angular.module("myApp")
             };
 
             $http.post('http://localhost:3000/logIn', formdata).then(function (response) {
-                if(response.data == "one or more of your inputs are wrong"){
+                if (response.data == "one or more of your inputs are wrong") {
                     window.alert("one or more of your inputs are wrong");
                     document.getElementById("userName").value = "";
                     document.getElementById("password").value = "";
-                }
-                else{
+                } else {
                     sessionStorage.setItem("token", response.data);
                     let token = response.data;
 
@@ -29,7 +28,12 @@ angular.module("myApp")
                             'x-auth-token': token,
                         }
                     }).then(function (res) {
-                        sessionStorage.setItem("favorites", JSON.stringify(res.data));
+                        if (res.data == "no points to show") {
+                            let arr = [];
+                            sessionStorage.setItem("favorites", JSON.stringify(arr));
+                        } else {
+                            sessionStorage.setItem("favorites", JSON.stringify(res.data));
+                        }
                     }, function (err) {
                         console.log(err)
                     });
