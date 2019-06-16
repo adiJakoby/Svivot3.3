@@ -91,7 +91,7 @@
             <br>
             <article>
                 <div ng-repeat="item in favoritesPoints" class="col-sm-6">
-                    <div class="thumbnail" style="max-width: 60%">
+                    <div class="thumbnail" style="border-color: white">
                         <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
                         <br/>
                         <p><strong><a data-toggle="modal" data-target="#myModal"><span
@@ -110,7 +110,7 @@
                 <div ng-switch="numOfPoints">
                     <div ng-switch-when="Bigger">
                         <div ng-repeat="point in savedPoints track by $index" class="col-sm-6">
-                            <div class="thumbnail">
+                            <div class="thumbnail" style="border-color: white">
                                 <img ng-src="{{ point.PICTURE }}" alt="Paris" width="400" height="300">
                                 <br/>
                                 <p><strong><a data-toggle="modal" data-target="#myModal"><span
