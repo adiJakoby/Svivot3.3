@@ -19,10 +19,8 @@ angular.module('myApp').controller('homeController', function ($scope, $http, $w
         function fixAnswer(data) {
             data = "[" + data +"]";
             data = data.replace(/\n/gi, ",");
-
             return data;
         }
-
         let ans = fixAnswer(res.data);
         self.points = JSON.parse(ans);
         console.log(self.points);

@@ -13,63 +13,49 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="pages/home/css/main.css">
     <link rel="stylesheet" type="text/css" href="pages/home/css/util.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
 </head>
 <body>
-<header class="w3-display-container w3-content w3-center" style="max-width:1500px">
-    <img class="w3-image" src="images/bg-home.jpg" alt="Me" width="1500">
+<header class="w3-display-container w3-content w3-center" style="max-width:1500px; max-height: 450px">
+    <img class="w3-image" src="images/bg-home.jpg" alt="Me" width="1500" height="800">
     <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">ADI JAKOBY</h1>
-        <h5 class="w3-hide-large" style="white-space:nowrap">ADI JAKOBY</h5>
+        <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">PARIS</h1>
+    </div>
+    <div class="w3-padding w3-display-bottommiddle w3-center">
+        <h2 class="w3-hide-medium w3-hide-small" style="color: white; font-family: Poppins-SemiBold;">To explore the city</h2>
+        <h2 class="w3-hide-medium w3-hide-small" style="color: white; font-family: Poppins-SemiBold;">first register or log in</h2>
+        <a href="#!logIn" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-log-in"></span> Log In
+        </a>
+        <a href="#!register" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-user"></span> Register
+        </a>
     </div>
 </header>
 
-</br>
-</br>
-<div id="background">
-    <!-- display all cities -->
-    <p ng-repeat="item in points">
-        <a ng-click="toShow(item.NAME)">
-            Point Name: <span ng-bind="item.NAME"></span><br>
-        </a>
-        <!--<img ng-src="{{ point.image }}">-->
-    </p>
-</div>
-
-
-<div id="poiShow" ng-show="poiShow">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <span class="login100-form-logo">
-                <!--<img ng-model="imgSource" src= {{imgSource}}>-->
-            </span>
-            <span ng-model="name" class="login100-form-title p-b-34 p-t-27">
-                {{name}}
-            </span>
-            <a class="txt2">Description</a>
-            <br/>
-            <a class="txt1" ng-model="description">{{description}}</a>
-            <br/>
-            <a class="txt2">Number of views</a>
-            <br/>
-            <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
-            <br/>
-            <a class="txt2">Rank</a>
-            <br/>
-            <a class="txt1" ng-model="rank">{{rank}}</a>
-            <br/>
-            <a class="txt2">Review</a>
-            <br/>
-            <a class="txt1" ng-model="review">{{review}}</a>
-            <br/>
-
-            <div class="container-login100-form-btn">
-                <button class="login100-form-btn" ng-click="stopShow()">
-                    Exit
-                </button>
+<section id="about" class="section1">
+    <div class="container-fluid bg-2 text-center" style="background-color: #333333">
+        <br/>
+        <br/>
+        <div ng-repeat="item in points" class="col-sm-4">
+            <div class="thumbnail">
+                <img ng-src="{{ item.PICTURE }}" alt="Paris" width="350" height="200">
+                <br/>
+                <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                        ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                <a ng-click="setCurrPoint(item.NAME)" ng-show="loggedIn" data-toggle="modal"
+                   data-target="#reviewModal">
+                    <span class="glyphicon glyphicon-pencil"></span> Review
+                </a>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+
 </body>
 </html>
