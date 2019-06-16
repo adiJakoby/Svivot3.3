@@ -2,22 +2,20 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
     let self = $scope;
     $scope.poiShow = false;
     self.toSortPoints = [];
-    let savedPoints = [];
     self.savedPoints = [];
 
     let token = $window.sessionStorage.getItem("token");
 
-    savedPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
+    let allPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
 
     let i = 0;
     let j = 0;
     let k = 0;
-    for (j; j < savedPoints.length;) {
+    for (j; j < allPoints.length;) {
         let fourPoints = [];
         for (i = 0; i < 4; i++) {
-            if (j < savedPoints.length) {
-                fourPoints[i] = savedPoints[j];
-                self.toSortPoints[j] = savedPoints[i];
+            if (j < allPoints.length) {
+                fourPoints[i] = allPoints[j];
                 j++;
             }
         }
@@ -45,6 +43,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             console.log(err)
         })
     }
+
     $scope.sortByRank = function () {
         /**
          * Generic array sorting
@@ -58,20 +57,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             };
         };
 
-        let i = 0;
-        let toSort = [];
-        //savedPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
-
-        for (; i < self.savedPoints.length; i++) {
-            let temp = self.savedPoints[i];
-            console.log(temp);
-            for (let j = 0; j < self.savedPoints[i].length; j++) {
-                if (i < self.savedPoints.length) {
-                    toSort[i] = savedPoints[j];
-                    i++;
-                }
-            }
-        }
+        let toSort = allPoints;
         toSort.sort(sortByProperty('rank'));
         console.log("*****");
         console.log(toSort);
