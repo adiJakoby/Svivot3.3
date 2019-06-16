@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <style>
 
+    <style>
+        @font-face {
+            font-family: Poppins-SemiBold;
+            src: url('pages/fonts/poppins/Poppins-SemiBold.ttf');
+        }
 
         article {
             -webkit-flex: 3;
             -ms-flex: 3;
             flex: 3;
-            padding: 10px;
+            /*padding: 20px;*/
         }
 
         /* Set black background color, white text and some padding */
@@ -40,12 +44,11 @@
             max-width: 500px;
             margin: auto;
             background: white;
-            padding: 10px;
+            /*padding: 10px;*/
         }
 
         hr {
-            border-right: 0;
-            border-left: 0;
+            border: 1px solid black;
             width: 100%;
         }
 
@@ -53,8 +56,22 @@
             text-align: center;
         }
 
+        thumbnail{
+            border: black 1px solid;
+            max-width: 400px !important;
+        }
+
         .thumbnail p {
             text-align: center;
+        }
+
+        h1{
+            font-family: Poppins-SemiBold;
+        }
+
+        p{
+            font-family: Poppins-SemiBold;
+            size: 14px;
         }
 
 
@@ -65,14 +82,16 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-12">
-            <h4>
-                <small>Recommendations</small>
-            </h4>
+            <h1 style="text-align: center">
+                <large>
+                Recommendations
+                </large>
+            </h1>
             <hr>
             <br>
             <article>
                 <div ng-repeat="item in favoritesPoints" class="col-sm-6">
-                    <div class="thumbnail">
+                    <div class="thumbnail" style="max-width: 60%">
                         <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
                         <br/>
                         <p><strong><a data-toggle="modal" data-target="#myModal"><span
@@ -81,9 +100,11 @@
                 </div>
             </article>
             <hr>
-            <h4>
-                <small>Your Saved Points Of View</small>
-            </h4>
+            <h1 style="text-align: center">
+                <large>
+                    Your last 2 saved points
+                </large>
+            </h1>
             <hr>
             <article>
                 <div ng-switch="numOfPoints">
@@ -99,8 +120,9 @@
                     </div>
                     <div ng-switch-when="zero">
                         <div class="content1">
-                            <h1><small>Hey user</small></h1>
-                            <p><small>you didnt saved any points yet, you can go to the search tab and add points</small> </p>
+                            <h1 style="text-align: center"><medium>Hey {{user}}</medium></h1>
+                            <p style="text-align: center"><small>You have'nt saved any points to your favorite list</small>
+                            <p style="text-align: center"><small>Go to the search tab and save points</small>
                         </div>
                     </div>
                 </div>
