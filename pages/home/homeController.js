@@ -1,5 +1,9 @@
-angular.module('myApp').controller('homeController', function ($scope, $http) {
+angular.module('myApp').controller('homeController', function ($scope, $http, $window) {
     $scope.poiShow = false;
+
+    if($scope.loggedIn){
+        $window.location.href = "#!loggedIn";
+    }
 
     let self = $scope;
     self.points = [];
