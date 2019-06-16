@@ -1,6 +1,7 @@
-angular.module('myApp').controller('favoritesController', function ($scope,$q, $http,$window) {
+angular.module('myApp').controller('favoritesController', function ($scope, $q, $http, $window) {
     let self = $scope;
     $scope.poiShow = false;
+    self.toSortPoints = [];
     let savedPoints = [];
     self.savedPoints = [];
 
@@ -16,37 +17,13 @@ angular.module('myApp').controller('favoritesController', function ($scope,$q, $
         for (i = 0; i < 4; i++) {
             if (j < savedPoints.length) {
                 fourPoints[i] = savedPoints[j];
+                self.toSortPoints[j] = savedPoints[i];
                 j++;
             }
         }
         self.savedPoints[k] = fourPoints;
         k++;
     }
-    // //get last two saved points
-    // $http({
-    //     method: "GET",
-    //     url: "http://localhost:3000/private/getSavedPoints",
-    //     headers: {
-    //         'x-auth-token': token,
-    //     }
-    // }).then(function (res) {
-    //     let i = 0;
-    //     let j = 0;
-    //     let k = 0;
-    //     for (j; j < res.data.length;) {
-    //         let threePoints = [];
-    //         for (i = 0; i < 3; i++) {
-    //             if (j < res.data.length) {
-    //                 threePoints[i] = res.data[j];
-    //                 j++;
-    //             }
-    //         }
-    //         self.points[k] = threePoints;
-    //         k++;
-    //     }
-    // }, function (err) {
-    //     console.log(err)
-    // })
 
     $scope.toShow = function (name) {
         $http({
@@ -69,7 +46,6 @@ angular.module('myApp').controller('favoritesController', function ($scope,$q, $
         })
     }
     $scope.sortByRank = function () {
-
         /**
          * Generic array sorting
          *
@@ -84,53 +60,39 @@ angular.module('myApp').controller('favoritesController', function ($scope,$q, $
 
         let i = 0;
         let toSort = [];
-        var promises = [];
+        //savedPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
 
         for (; i < self.savedPoints.length; i++) {
-            let name = self.savedPoints[i].NAME;
-            {
-                let sortPosition = i;
-                promises.push($http({
-                    method: "GET",
-                    url: "http://localhost:3000/getPoint",
-                    params: {
-                        pointName: name
-                    }
-                }).then(res => {
-                    res.data[0].NAME = name;
-                    toSort[sortPosition] = res.data[0];
-                }, function (err) {
-                    console.log(err)
-                }));
+            let temp = self.savedPoints[i];
+            console.log(temp);
+            for (let j = 0; j < self.savedPoints[i].length; j++) {
+                if (i < self.savedPoints.length) {
+                    toSort[i] = savedPoints[j];
+                    i++;
+                }
             }
         }
+        toSort.sort(sortByProperty('rank'));
+        console.log("*****");
+        console.log(toSort);
 
-        $q.all(promises).then(function () {
-            console.log(toSort);
-            toSort.sort(sortByProperty('rank'));
-            console.log("*****");
-            console.log(toSort);
-
-            self.points = [];
-            i = 0;
-            let j = 0;
-            let k = 0;
-            for (j; j < toSort.length;) {
-                let fourPoints = [];
-                for (i = 0; i < 4; i++) {
-                    if (j < toSort.length) {
-                        toSort[j].PICTURE = "images/" + toSort[j].NAME + ".jpg";
-                        fourPoints[i] = toSort[j];
-                        j++;
-                    }
+        self.savedPoints = [];
+        i = 0;
+        let j = 0;
+        let k = 0;
+        for (j; j < toSort.length;) {
+            let fourPoints = [];
+            for (i = 0; i < 4; i++) {
+                if (j < toSort.length) {
+                    fourPoints[i] = toSort[j];
+                    j++;
                 }
-                self.savedPoints[k] = fourPoints;
-                k++;
             }
-        })
+            self.savedPoints[k] = fourPoints;
+            k++;
+        }
     }
-})
-;
+});
 
 
 
