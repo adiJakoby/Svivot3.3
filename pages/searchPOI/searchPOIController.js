@@ -311,7 +311,6 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
             }
         })
     }
-
 });
 
 

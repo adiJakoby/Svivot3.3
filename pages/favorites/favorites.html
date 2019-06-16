@@ -129,6 +129,16 @@
                     <br/>
                     <p><strong><a data-toggle="modal" data-target="#myModal"><span
                             ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                    <a ng-click="setCurrPoint(item.NAME)" ng-show="loggedIn" data-toggle="modal"
+                       data-target="#reviewModal">
+                        <span class="glyphicon glyphicon-pencil"></span> Review
+                    </a>
+                    <a ng-click="unSave(item.NAME)" ng-show="item.saved && loggedIn">
+                        <span class="glyphicon glyphicon-star"></span> Saved
+                    </a>
+                    <a ng-click="save(item.NAME)" ng-show="!item.saved && loggedIn">
+                        <span class="glyphicon glyphicon-star-empty"></span> Not Saved
+                    </a>
                 </div>
             </div>
         </div>
@@ -170,7 +180,47 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="reviewModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title"><span ng-model="currPoint" class="login100-form-title p-b-34 p-t-27">
+                    {{currPoint}}</span></h2>
+            </div>
+            <div class="modal-body">
+                <h3>Rank (1 - low | 5 - high)</h3>
+                <label class="radio-inline">
+                    <input id="1" type="radio" name="optradio" checked>1
+                </label>
+                <label class="radio-inline">
+                    <input id="2" type="radio" name="optradio">2
+                </label>
+                <label class="radio-inline">
+                    <input id="3" type="radio" name="optradio">3
+                </label>
+                <label class="radio-inline">
+                    <input id="4" type="radio" name="optradio">4
+                </label>
+                <label class="radio-inline">
+                    <input id="5" type="radio" name="optradio">5
+                </label>
+                <h3>Review</h3>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="review()">Send Review
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -185,7 +235,8 @@
                     <ul ng-repeat="item in set">{{item.NAME}}
                     </ul>
                 </ul>
-                <input type="text" id = "itemsOrder" class="form-control" placeholder="insert points by wanted order" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" id="itemsOrder" class="form-control" placeholder="insert points by wanted order"
+                       aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
