@@ -30,32 +30,23 @@ angular.module('myApp').controller('homeController', function ($scope, $http, $w
 
     $scope.toShow = function (name) {
         $http({
-            method : "GET",
-            url : "http://localhost:3000/getPoint",
-            params : {
+            method: "GET",
+            url: "http://localhost:3000/getPoint",
+            params: {
                 pointName: name
             }
-        }).then( function (res) {
+        }).then(function (res) {
             console.log(res.data);
             $scope.name = name;
-            $scope.imgSource = 'images/3.JPG';
             $scope.description = res.data[0].description;
             $scope.numOfViews = res.data[0].numofviews;
             $scope.rank = res.data[0].rank;
             $scope.review = res.data[0].REVIEW;
-            console.log($scope.description)
 
-            $scope.poiShow = true;
-        }, function (err) {
+            }, function (err) {
             console.log(err)
         })
-
     }
-
-    $scope.stopShow = function () {
-        $scope.poiShow = false;
-    }
-
 });
 
 

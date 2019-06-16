@@ -1,7 +1,113 @@
-<h2>About</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About Paris</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            font-family: Poppins-SemiBold;
+            src: url('pages/fonts/poppins/Poppins-SemiBold.ttf');
+        }
+        @font-face {
+            font-family: Poppins-ExtraBold;
+            src: url('pages/fonts/poppins/Poppins-ExtraBold.ttf');
+        }
+        h1{
+            text-align: center;
+            font-family: Poppins-ExtraBold;
+            font-size: xx-large;
+        }
+        p{
+            text-align: center;
+            font-family: Poppins-SemiBold;
+            font-size: medium;
+        }
+        .container {
+            /*padding: 80px 120px;*/
+        }
 
-<!-- display button functionality -->
-<div>
-    <button ng-click="myFunc()">Click Me!</button>
-    <p>This button has been clicked {{ btnCount }} times.</p>
+        .carousel-inner img {
+            /*-webkit-filter: grayscale(90%);*/
+            /*filter: grayscale(90%); !* make all photos black and white *!*/
+            width: 100%; /* Set width to 100% */
+            margin: auto;
+        }
+        .carousel-caption h3 {
+            color: #fff !important;
+        }
+
+        .carousel-caption h1 {
+            text-align:left;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            /*margin-left:30px;*/
+        }
+        .carousel-caption p {
+            text-align:left;
+            margin-top: 10px;
+            margin-bottom: 50%;
+            /*margin-top:20%;*/
+        }
+        @media (max-width: 600px) {
+            .carousel-caption {
+                display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/1.jpg" alt="Eiffel Tower" width="1200">
+            <div class="carousel-caption">
+                <h1>PARIS</h1>
+                <p> PARIS is Europe's most fantastic city, a place that has everything for the traveller or visitor.
+                    Whether you visit Paris on a day trip, Paris in the Spring, Paris for a week or for far longer, this is a city that has it all!
+                    Museums, theatres, shops, fantastic historic monuments, a beautiful riverscape, Paris has all of these.
+                    This website helps you plan your visit to Paris, and get the best out of your stay in the French capital.</p>
+                <br/>
+                <h3>Eiffel Tower</h3>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="images/2.jpg" alt="Arc de Triomphe" width="1200">
+            <div class="carousel-caption">
+                <h1>PARIS</h1>
+                <p> PARIS is Europe's most fantastic city, a place that has everything for the traveller or visitor.
+                    Whether you visit Paris on a day trip, Paris in the Spring, Paris for a week or for far longer, this is a city that has it all!
+                    Museums, theatres, shops, fantastic historic monuments, a beautiful riverscape, Paris has all of these.
+                    This website helps you plan your visit to Paris, and get the best out of your stay in the French capital.</p>
+                <br/>
+                <h3>Arc de Triomphe</h3>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="images/3.jpg" alt="Seine River" width="1200">
+            <div class="carousel-caption">
+                <h1>PARIS</h1>
+                <p> PARIS is Europe's most fantastic city, a place that has everything for the traveller or visitor.
+                    Whether you visit Paris on a day trip, Paris in the Spring, Paris for a week or for far longer, this is a city that has it all!
+                    Museums, theatres, shops, fantastic historic monuments, a beautiful riverscape, Paris has all of these.
+                    This website helps you plan your visit to Paris, and get the best out of your stay in the French capital.</p>
+                <br/>
+                <h3>Seine River</h3>
+            </div>
+        </div>
+    </div>
 </div>
+
+</body>
+</html>
