@@ -58,7 +58,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         };
 
         let toSort = allPoints;
-        toSort.sort(sortByProperty('rank'));
+        toSort.sort(sortByProperty('RANK'));
         console.log("*****");
         console.log(toSort);
 
@@ -78,8 +78,93 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             k++;
         }
     }
-});
+
+    $scope.saveChanges = function () {
+        let itemsOrder = document.getElementById("itemsOrder").value;
+        let pointsByOrder = itemsOrder.split(',');
+
+        var sortByUserOrder = function (itemsOrder) {
+            let newOrder = []
+
+            i = 0;
+            let j = 0;
+            let k = 0;
+            let y = 0;
+            let newPointsOrder = [];
+            var promises = [];
+            for (; i < pointsByOrder.length; i++) {
+                let name = pointsByOrder[i];
+                {
+                    let sortPosition = i;
+                    promises.push($http({
+                        method: "GET",
+                        url: "http://localhost:3000/getPoint",
+                        params: {
+                            pointName: name
+                        }
+                    }).then(res => {
+                        newPointsOrder[sortPosition] = res.data[0];
+                    }, function (err) {
+                        console.log(err)
+                    }));
+                }
+            }
+            $q.all(promises).then(function () {
+                self.savedPoints = [];
+
+                i = 0;
+                j = 0;
+                k = 0;
+                for (j; j < newPointsOrder.length;) {
+                    let fourPoints = [];
+                    for (i = 0; i < 4; i++) {
+                        if (j < newPointsOrder.length) {
+                            fourPoints[i] = newPointsOrder[j];
+                            j++;
+                        }
+                    }
+                    self.savedPoints[k] = fourPoints;
+                    k++;
+                }
+            });
+        }
+        sortByUserOrder(pointsByOrder);
+    }
 
 
+    $scope.sortByCategory = function () {
+        /**
+         * Generic array sorting
+         *
+         * @param property
+         * @returns {Function}
+         */
+        var sortByProperty = function (property) {
+            return function (x, y) {
+                return ((x[property] === y[property]) ? 0 : ((x[property] < y[property]) ? 1 : -1));
+            };
+        };
 
+        let toSort = allPoints;
+        toSort.sort(sortByProperty('CATEGORY'));
+        console.log("*****");
+        console.log(toSort);
 
+        self.savedPoints = [];
+        i = 0;
+        let j = 0;
+        let k = 0;
+        for (j; j < toSort.length;) {
+            let fourPoints = [];
+            for (i = 0; i < 4; i++) {
+                if (j < toSort.length) {
+                    fourPoints[i] = toSort[j];
+                    j++;
+                }
+            }
+            self.savedPoints[k] = fourPoints;
+            k++;
+        }
+    }
+})
+;

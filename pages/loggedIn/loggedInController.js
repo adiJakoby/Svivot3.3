@@ -5,6 +5,7 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
     let favoritesPoints = [];
     self.savedPoints = [];
     self.favoritesPoints = [];
+    $scope.numOfPoints="";
 
     let token = $window.sessionStorage.getItem("token");
 
@@ -40,6 +41,12 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
             'x-auth-token': token,
         }
     }).then(function (res) {
+        if(res.data=="no points saved"){
+            $scope.numOfPoints="zero";
+        }
+        else{
+            $scope.numOfPoints="Bigger";
+        }
         for (let j = 0; j < res.data.length; j++) {
             savedPoints[j] = res.data[j];
             $http({

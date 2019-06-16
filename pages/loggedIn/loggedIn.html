@@ -30,19 +30,30 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height: auto;
+
+            .row.content {
+                height: auto;
             }
         }
+
+        .content1 {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 10px;
+        }
+
         hr {
-            border-right : 0;
+            border-right: 0;
             border-left: 0;
             width: 100%;
         }
-        h4{
+
+        h4 {
             text-align: center;
         }
 
-        .thumbnail p{
+        .thumbnail p {
             text-align: center;
         }
 
@@ -54,29 +65,43 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-12">
-            <h4><small>Your Favorites Points Of View</small></h4>
+            <h4>
+                <small>Recommendations</small>
+            </h4>
             <hr>
             <br>
             <article>
-                    <div ng-repeat="item in favoritesPoints" class="col-sm-6">
-                        <div class="thumbnail">
-                            <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
-                            <br/>
-                            <p><strong><a data-toggle="modal" data-target="#myModal"><span
-                                    ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
-                        </div>
-                    </div>
-            </article>
-            <hr>
-            <h4><small>Your Saved Points Of View</small></h4>
-            <hr>
-            <article>
-                <div ng-repeat="point in savedPoints track by $index" class="col-sm-6">
+                <div ng-repeat="item in favoritesPoints" class="col-sm-6">
                     <div class="thumbnail">
-                        <img ng-src="{{ point.PICTURE }}" alt="Paris" width="400" height="300">
+                        <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
                         <br/>
                         <p><strong><a data-toggle="modal" data-target="#myModal"><span
-                                ng-bind="point.NAME" ng-click="toShow(point.NAME)"></span></a></strong></p>
+                                ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                    </div>
+                </div>
+            </article>
+            <hr>
+            <h4>
+                <small>Your Saved Points Of View</small>
+            </h4>
+            <hr>
+            <article>
+                <div ng-switch="numOfPoints">
+                    <div ng-switch-when="Bigger">
+                        <div ng-repeat="point in savedPoints track by $index" class="col-sm-6">
+                            <div class="thumbnail">
+                                <img ng-src="{{ point.PICTURE }}" alt="Paris" width="400" height="300">
+                                <br/>
+                                <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                                        ng-bind="point.NAME" ng-click="toShow(point.NAME)"></span></a></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="zero">
+                        <div class="content1">
+                            <h1><small>Hey user</small></h1>
+                            <p><small>you didnt saved any points yet, you can go to the search tab and add points</small> </p>
+                        </div>
                     </div>
                 </div>
             </article>
