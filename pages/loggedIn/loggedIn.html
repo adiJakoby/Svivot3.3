@@ -113,7 +113,7 @@
                             <div class="thumbnail" style="border-color: white">
                                 <img ng-src="{{ point.PICTURE }}" alt="Paris" width="400" height="300">
                                 <br/>
-                                <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                                <p><strong><a data-toggle="modal" data-target="#reviewModal"><span
                                         ng-bind="point.NAME" ng-click="toShow(point.NAME)"></span></a></strong></p>
                             </div>
                         </div>
@@ -130,38 +130,41 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="reviewModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title"><span ng-model="name" class="login100-form-title p-b-34 p-t-27">
-                    {{name}}</span></h2>
-                <a ng-click="save()" ng-show="loggedIn" ng-model="saved">
-                    <span class="glyphicon glyphicon-heart"></span> {{saved}}
-                </a>
+                <h2 class="modal-title"><span ng-model="currPoint" class="login100-form-title p-b-34 p-t-27">
+                    {{currPoint}}</span></h2>
             </div>
             <div class="modal-body">
-                <h3>Description</h3>
-                <a class="txt1" ng-model="description">{{description}}</a>
-                <br/>
-                <h3>Number of views</h3>
-                <a class="txt1" ng-model="numOfViews">{{numOfViews}}</a>
-                <br/>
-                <h3>Rank</h3>
-                <a class="txt1" ng-model="rank">{{rank}}</a>
-                <br/>
+                <h3>Rank (1 - low | 5 - high)</h3>
+                <label class="radio-inline">
+                    <input id="1" type="radio" name="optradio" checked>1
+                </label>
+                <label class="radio-inline">
+                    <input id="2" type="radio" name="optradio">2
+                </label>
+                <label class="radio-inline">
+                    <input id="3" type="radio" name="optradio">3
+                </label>
+                <label class="radio-inline">
+                    <input id="4" type="radio" name="optradio">4
+                </label>
+                <label class="radio-inline">
+                    <input id="5" type="radio" name="optradio">5
+                </label>
                 <h3>Review</h3>
-                <a class="txt1" ng-model="review">{{review}}</a>
-                <br/>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="review()">Send Review
+                </button>
             </div>
         </div>
-
     </div>
 </div>
 </body>

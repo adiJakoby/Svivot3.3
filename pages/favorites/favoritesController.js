@@ -126,6 +126,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
                     self.savedPoints[k] = fourPoints;
                     k++;
                 }
+                $window.sessionStorage.setItem('favorites',JSON.stringify(newPointsOrder));
             });
         }
         sortByUserOrder(pointsByOrder);
@@ -165,6 +166,90 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             self.savedPoints[k] = fourPoints;
             k++;
         }
+    }
+
+    $scope.unSave = function (name) {
+        let temp = [];
+        for(let i = 0; i < fav.length; i++){
+            if(fav[i].NAME == name){
+
+            }else{
+                temp.push(fav[i]);
+            }
+        }
+        fav = temp;
+        $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+        $scope.reset();
+    }
+    $scope.save = function (name) {
+        $http({
+            method: "GET",
+            url: "http://localhost:3000/getPoint",
+            params: {
+                pointName: name
+            }
+        }).then(function (res) {
+            fav.push(res.data[0]);
+            $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+            $scope.reset();
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    $scope.review = function () {
+        let token = $window.sessionStorage.getItem("token");
+        let comment = document.getElementById('comment').value;
+        let point = self.currPoint;
+        let rank = 0
+        if(document.getElementById("1").checked){
+            rank = 1;
+        }
+        else if(document.getElementById("2").checked){
+            rank = 2;
+        }
+        else if(document.getElementById("3").checked){
+            rank = 3;
+        }
+        else if(document.getElementById("4").checked){
+            rank = 4;
+        }
+        else if(document.getElementById("5").checked){
+            rank = 5;
+        }
+
+        console.log(rank);
+        $http({
+            method: "PUT",
+            url: "http://localhost:3000/private/addRank",
+            headers: {
+                'x-auth-token': token,
+            },
+            params: {
+                pointName: point,
+                rank: rank
+            }
+        }).then(function (res) {
+            console.log(res.data);
+        }, function (err) {
+            console.log(err)
+        });
+
+        $http({
+            method: "PUT",
+            url: "http://localhost:3000/private/addReview",
+            headers: {
+                'x-auth-token': token,
+            },
+            params: {
+                pointName: point,
+                review: comment
+            }
+        }).then(function (res) {
+            $window.alert("Your review has added,\nThank you")
+        }, function (err) {
+            console.log(err)
+        });
     }
 })
 ;
