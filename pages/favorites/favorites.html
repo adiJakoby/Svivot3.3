@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>My Favorites</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
     <style>
         @font-face {
             font-family: Poppins-SemiBold;
@@ -274,11 +275,11 @@
             <div class="modal-body">
                 Current Points Order:
                 <ul ng-repeat="set in savedPoints">
-                    <ul ng-repeat="item in set">{{item.NAME}}
+                    <ul ng-repeat="item in set" for="{{item.NAME}}">
+                        <select id="{{item.NAME}}" ng-model="selectedName" ng-options="x for x in numOfFavorites">index
+                        </select> {{item.NAME}}
                     </ul>
                 </ul>
-                <input type="text" id="itemsOrder" class="form-control" placeholder="insert points by wanted order"
-                       aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
