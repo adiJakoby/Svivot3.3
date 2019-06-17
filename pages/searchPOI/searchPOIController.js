@@ -1,6 +1,6 @@
 angular.module('myApp').controller('searchPOIController', function ($scope, $q, $http, $window) {
     $scope.poiShow = false;
-
+    $scope.numOfReviews="";
     let self = $scope;
     self.points = [];
     self.allPoints = [];
@@ -191,7 +191,18 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
             $scope.numOfViews = res.data[0].numofviews;
             $scope.rank = res.data[0].rank;
             $scope.review = res.data[0].REVIEW;
-
+            if(res.data.length==2){
+                $scope.review1=res.data[1].REVIEW;
+                $scope.date1 =(res.data[1].DATE).substring(0,10);
+                $scope.numOfReviews="two";
+            }
+            else if(res.data.length==1){
+                $scope.numOfReviews="two";
+                $scope.review1=""
+                $scope.date1 ="";
+            }else{
+                $scope.numOfReviews="zero";
+            }
             $scope.poiShow = true;
         }, function (err) {
             console.log(err)

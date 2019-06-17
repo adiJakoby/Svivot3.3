@@ -4,6 +4,8 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
     self.toSortPoints = [];
     self.savedPoints = [];
     $scope.numOfPoints="";
+    $scope.numOfReviews="";
+    self.currPoint = "";
 
     let token = $window.sessionStorage.getItem("token");
 
@@ -49,7 +51,20 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             $scope.numOfViews = res.data[0].numofviews;
             $scope.rank = res.data[0].rank;
             $scope.review = res.data[0].REVIEW;
-
+            $scope.date =(res.data[0].DATE).substring(0,10);
+            if(res.data.length==2){
+                $scope.review1=res.data[1].REVIEW;
+                $scope.date1 =(res.data[1].DATE).substring(0,10);
+                $scope.numOfReviews="two";
+            }
+            else if(res.data.length==1){
+                $scope.numOfReviews="two";
+                $scope.review1=""
+                $scope.date1 ="";
+            }
+            else {
+                $scope.numOfReviews="zero";
+            }
             $scope.poiShow = true;
         }, function (err) {
             console.log(err)
@@ -237,6 +252,10 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         })
     }
 
+    $scope.setCurrPoint = function (name) {
+        self.currPoint = name;
+    }
+
     $scope.review = function () {
         let token = $window.sessionStorage.getItem("token");
         let comment = document.getElementById('comment').value;
@@ -258,6 +277,8 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             rank = 5;
         }
 
+        // self.currPoint.rank.rank);
+        // self.currPoint.review.add(comment);
         console.log(rank);
         $http({
             method: "PUT",
@@ -286,6 +307,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
                 review: comment
             }
         }).then(function (res) {
+            console.log(res.data)
             $window.alert("Your review has added,\nThank you")
         }, function (err) {
             console.log(err)

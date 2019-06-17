@@ -68,6 +68,28 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
+
+        td{
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color:#337ab7;
+        }
+
+        th{
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+
+        tr:nth-child(even) {
+        //background-color: #dddddd;
+        }
+
+
         input[type=text]:focus {
             background-color: #f2e6ff;
         }
@@ -157,8 +179,28 @@
                 <h3>Rank</h3>
                 <a class="txt1" ng-model="rank">{{rank}}</a>
                 <br/>
-                <h3>Review</h3>
-                <a class="txt1" ng-model="review">{{review}}</a>
+                <h3>Reviews</h3>
+                <div ng-switch="numOfReviews">
+                    <div ng-switch-when="two">
+                        <table>
+                            <tr>
+                                <th>Review</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td class="txt1" ng-model="review">{{review}}</td>
+                                <td class="txt1" ng-model="date">{{date}}</td>
+                            </tr>
+                            <tr>
+                                <td class="txt1" ng-model="review1">{{review1}}</td>
+                                <td class="txt1" ng-model="date1">{{date1}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div ng-switch-when="zero">
+                        <a class="txt1" ng-model="review">{{review}}</a>
+                    </div>
+                </div>
                 <br/>
             </div>
             <div class="modal-footer">
@@ -168,7 +210,6 @@
 
     </div>
 </div>
-
 
 <div class="modal fade" id="reviewModal" role="dialog">
     <div class="modal-dialog">
