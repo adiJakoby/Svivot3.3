@@ -3,10 +3,21 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
     $scope.poiShow = false;
     self.toSortPoints = [];
     self.savedPoints = [];
+    $scope.numOfPoints="";
 
     let token = $window.sessionStorage.getItem("token");
 
     let allPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
+
+    if(allPoints.length>0){
+        $scope.numOfPoints="Bigger";
+    }else{
+        $scope.numOfPoints="zero";
+    }
+
+    for(let y = 0;y<allPoints.length;y++){
+        allPoints[y].saved=true;
+    }
 
     let i = 0;
     let j = 0;
@@ -16,6 +27,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         for (i = 0; i < 4; i++) {
             if (j < allPoints.length) {
                 fourPoints[i] = allPoints[j];
+                // fourPoints[i].saved=true;
                 j++;
             }
         }
@@ -104,6 +116,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
                         }
                     }).then(res => {
                         newPointsOrder[sortPosition] = res.data[0];
+                        newPointsOrder[sortPosition].saved=true;
                     }, function (err) {
                         console.log(err)
                     }));
@@ -119,7 +132,9 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
                     let fourPoints = [];
                     for (i = 0; i < 4; i++) {
                         if (j < newPointsOrder.length) {
+                            newPointsOrder[j].saved=true;
                             fourPoints[i] = newPointsOrder[j];
+                            // fourPoints[i].saved=true;
                             j++;
                         }
                     }
@@ -132,6 +147,30 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         sortByUserOrder(pointsByOrder);
     }
 
+    $scope.reset = function () {
+        self.savedPoints=[];
+        let allPoints = JSON.parse($window.sessionStorage.getItem("favorites"));
+
+        for(let y=0;y<allPoints.length;y++){
+            allPoints[y].saved=true;
+        }
+
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        for (j; j < allPoints.length;) {
+            let fourPoints = [];
+            for (i = 0; i < 4; i++) {
+                if (j < allPoints.length) {
+                    fourPoints[i] = allPoints[j];
+                    // fourPoints[i].saved=true;
+                    j++;
+                }
+            }
+            self.savedPoints[k] = fourPoints;
+            k++;
+        }
+    }
 
     $scope.sortByCategory = function () {
         /**
@@ -169,10 +208,11 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
     }
 
     $scope.unSave = function (name) {
+        let fav =  JSON.parse(sessionStorage.getItem("favorites"));
         let temp = [];
         for(let i = 0; i < fav.length; i++){
             if(fav[i].NAME == name){
-
+                fav[i].saved=false;
             }else{
                 temp.push(fav[i]);
             }

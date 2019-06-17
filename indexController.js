@@ -17,16 +17,8 @@ angular.module('myApp').controller('indexController', function ($scope, $window,
                 'x-auth-token': token,
             }
         }).then(function (res) {
-                let exist = false;
                 let fav = JSON.parse($window.sessionStorage.getItem("favorites"));
                 for (let i = 0; i < res.data.length; i++) {
-                    // exist = false;
-                    // for (let j = 0; j < fav.length; j++) {
-                    //     if (res.data[i].NAME == fav[j].NAME) {
-                    //         exist = true;
-                    //     }
-                    // }
-                    // if (!exist) {
                     let name = res.data[i].NAME;
                     $http({
                             method: "DELETE",
@@ -44,16 +36,8 @@ angular.module('myApp').controller('indexController', function ($scope, $window,
                             console.log(err)
                         }
                     );
-                    //}
                 }
                 for (let i = 0; i < fav.length; i++) {
-                    // exist = false;
-                    // for (let j = 0; j < res.data.length; j++) {
-                    //     if (res.data[j].NAME == fav[i].NAME) {
-                    //         exist = true;
-                    //     }
-                    // }
-                    //if (!exist) {
                     let name = fav[i].NAME;
                     $http({
                             method: "PUT",
@@ -68,14 +52,12 @@ angular.module('myApp').controller('indexController', function ($scope, $window,
                         }
                     ).then(function (res) {
                             console.log(res.data);
-                            $window.alert("Your changes have been saved!")
                         }, function (err) {
                             console.log(err)
                         }
                     );
-                    //}
+                    $window.alert("Your changes have been saved!")
                 }
-
             },
 
             function (err) {

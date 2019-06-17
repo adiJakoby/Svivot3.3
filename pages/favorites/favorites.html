@@ -122,23 +122,38 @@
 </br>
 <section>
     <article>
-        <div ng-repeat="set in savedPoints" class="row text-center">
-            <div ng-repeat="item in set" class="col-sm-3">
-                <div class="thumbnail">
-                    <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
-                    <br/>
-                    <p><strong><a data-toggle="modal" data-target="#myModal"><span
-                            ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
-                    <a ng-click="setCurrPoint(item.NAME)" ng-show="loggedIn" data-toggle="modal"
-                       data-target="#reviewModal">
-                        <span class="glyphicon glyphicon-pencil"></span> Review
-                    </a>
-                    <a ng-click="unSave(item.NAME)" ng-show="item.saved && loggedIn">
-                        <span class="glyphicon glyphicon-star"></span> Saved
-                    </a>
-                    <a ng-click="save(item.NAME)" ng-show="!item.saved && loggedIn">
-                        <span class="glyphicon glyphicon-star-empty"></span> Not Saved
-                    </a>
+        <div ng-switch="numOfPoints">
+            <div ng-switch-when="Bigger">
+                <div ng-repeat="set in savedPoints" class="row text-center">
+                    <div ng-repeat="item in set" class="col-sm-3">
+                        <div class="thumbnail">
+                            <img ng-src="{{ item.PICTURE }}" alt="Paris" width="400" height="300">
+                            <br/>
+                            <p><strong><a data-toggle="modal" data-target="#myModal"><span
+                                    ng-bind="item.NAME" ng-click="toShow(item.NAME)"></span></a></strong></p>
+                            <a ng-click="setCurrPoint(item.NAME)" ng-show="loggedIn" data-toggle="modal"
+                               data-target="#reviewModal">
+                                <span class="glyphicon glyphicon-pencil"></span> Review
+                            </a>
+                            <a ng-click="unSave(item.NAME)" ng-show="item.saved && loggedIn">
+                                <span class="glyphicon glyphicon-star"></span> Saved
+                            </a>
+                            <a ng-click="save(item.NAME)" ng-show="!item.saved && loggedIn">
+                                <span class="glyphicon glyphicon-star-empty"></span> Not Saved
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="zero">
+                <div class="content1">
+                    <h1 style="text-align: center">
+                        <medium>Hey {{user}}</medium>
+                    </h1>
+                    <p style="text-align: center">
+                        <small>You have'nt saved any points to your favorite list</small>
+                    <p style="text-align: center">
+                        <small>Go to the search tab and save points</small>
                 </div>
             </div>
         </div>
