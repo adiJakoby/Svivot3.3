@@ -127,15 +127,13 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
             order = document.getElementById(pointName).value;
             thePoint.ORDER = parseInt(order.substring(7), 10);
             indexex=parseInt(order.substring(7), 10);
-            pointsByOrder[y] = thePoint;//{point: thePoint, index:order.substring(7)}
+            pointsByOrder[y] = thePoint;
         }
         let o=0;
-        let x;
-
-
+        // let x;
         for(o;o<indexex.length;o++){
             let currentIndex=indexex[o];
-            for(x=o+1;x<indexex.length;x++){
+            for(let x=o+1;x<indexex.length;x++){
                 if(indexex[x]==currentIndex){
                     $window.alert("You insert the same index twice, please try again");
                 }
@@ -250,6 +248,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         }
         fav = temp;
         $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+        $scope.$emit('favoritesNumber');
         $scope.reset();
     }
     $scope.save = function (name) {
@@ -262,6 +261,7 @@ angular.module('myApp').controller('favoritesController', function ($scope, $q, 
         }).then(function (res) {
             fav.push(res.data[0]);
             $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+            $scope.$emit('favoritesNumber');
             $scope.reset();
         }, function (err) {
             console.log(err)

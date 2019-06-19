@@ -102,6 +102,7 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
         }
         fav = temp;
         $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+        $scope.$emit('favoritesNumber');
         $scope.reset();
     }
     $scope.save = function (name) {
@@ -114,6 +115,7 @@ angular.module('myApp').controller('searchPOIController', function ($scope, $q, 
         }).then(function (res) {
             fav.push(res.data[0]);
             $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+            $scope.$emit('favoritesNumber');
             $scope.reset();
         }, function (err) {
             console.log(err)

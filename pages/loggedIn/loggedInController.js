@@ -122,6 +122,7 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
         }
         fav = temp;
         $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+        $scope.$emit('favoritesNumber');
         $scope.reset();
     }
 
@@ -154,6 +155,7 @@ angular.module('myApp').controller('loggedInController', function ($scope, $http
             res.data[0].saved=true;
             fav.push(res.data[0]);
             $window.sessionStorage.setItem("favorites", JSON.stringify(fav));
+            $scope.$emit('favoritesNumber');
             $scope.reset();
         }, function (err) {
             console.log(err)

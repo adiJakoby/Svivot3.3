@@ -34,12 +34,15 @@ angular.module("myApp")
                         } else {
                             sessionStorage.setItem("favorites", JSON.stringify(res.data));
                         }
+
+                        $scope.$emit('loggedIn', {userName: userName, loggedIn: true});
+                        $window.location.href = "#!loggedIn"
                     }, function (err) {
                         console.log(err)
                     });
-
-                    $scope.$emit('loggedIn', {userName: userName, loggedIn: true});
-                    $window.location.href = "#!loggedIn"
+                    //
+                    // $scope.$emit('loggedIn', {userName: userName, loggedIn: true});
+                    // $window.location.href = "#!loggedIn"
                 }
                 // $scope.myWelcome = response.data;
             });
